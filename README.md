@@ -27,7 +27,4 @@ To get started with this project, follow these steps:
    Then, open `.env` and replace `YOUR_GEMINI_API_KEY` with your actual key.
 
 5. Run the Jupyter notebooks:
-   ```bash
-   jupyter notebook
-   ```
-   Open `L6-functional_conversation-student.ipynb` in your browser to start. 
+   - For a demo of Langchain, open and run the `langchain-demo.ipynb` notebook in your IDE.
