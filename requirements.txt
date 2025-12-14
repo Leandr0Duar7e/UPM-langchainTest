@@ -3,3 +3,5 @@ python-dotenv
 langchain-google-genai
 ipykernel
 gradio
+param
+wikipedia
