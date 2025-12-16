@@ -155,23 +155,23 @@ def gemini_extract_claims(
     """Use Gemini to extract factual claims from article text."""
 
     prompt = f"""Analyze this news article and extract the key factual claims that can be verified.
-Return a JSON array of strings, each string being one distinct factual claim.
-Focus on claims about:
-- Statistics and numbers
-- Events that happened
-- Quotes attributed to people
-- Scientific or research findings
-- Dates and timelines
+                Return a JSON array of strings, each string being one distinct factual claim.
+                Focus on claims about:
+                - Statistics and numbers
+                - Events that happened
+                - Quotes attributed to people
+                - Scientific or research findings
+                - Dates and timelines
 
-Article Title: {article_title}
+                Article Title: {article_title}
 
-Article Text:
-{article_text[:4000]}
+                Article Text:
+                {article_text[:4000]}
 
-Return ONLY a valid JSON array of strings, no other text. Example format:
-["Claim 1 here", "Claim 2 here", "Claim 3 here"]
+                Return ONLY a valid JSON array of strings, no other text. Example format:
+                ["Claim 1 here", "Claim 2 here", "Claim 3 here"]
 
-Extract 3-5 of the most important verifiable claims."""
+                Extract 3-5 of the most important verifiable claims."""
 
     response = client.models.generate_content(
         model="gemini-2.5-flash",
@@ -205,20 +205,20 @@ def gemini_verify_claim_with_search(
 
     prompt = f"""You are a fact-checker. Verify the following claim using web search.
 
-CLAIM: {claim}
+                CLAIM: {claim}
 
-Analyze the search results and determine:
-1. Is this claim VERIFIED (supported by evidence), FALSE (contradicted by evidence), 
-   UNCERTAIN (mixed or insufficient evidence), or NEEDS_REVIEW (sensitive topic requiring human review)?
-2. What evidence supports or contradicts this claim?
-3. What are the sources?
+                Analyze the search results and determine:
+                1. Is this claim VERIFIED (supported by evidence), FALSE (contradicted by evidence), 
+                UNCERTAIN (mixed or insufficient evidence), or NEEDS_REVIEW (sensitive topic requiring human review)?
+                2. What evidence supports or contradicts this claim?
+                3. What are the sources?
 
-Respond in this exact JSON format:
-{{
-    "verdict": "verified" or "false" or "uncertain" or "needs_review",
-    "evidence": "Brief explanation of what you found",
-    "sources": ["source1", "source2"]
-}}"""
+                Respond in this exact JSON format:
+                {{
+                    "verdict": "verified" or "false" or "uncertain" or "needs_review",
+                    "evidence": "Brief explanation of what you found",
+                    "sources": ["source1", "source2"]
+                }}"""
 
     try:
         # Use Gemini's built-in Google Search tool for grounding
@@ -275,24 +275,24 @@ def gemini_generate_report(client: genai.Client, state: GraphState) -> str:
 
     prompt = f"""Generate a concise fact-check report for this news article.
 
-Article Title: {state.get("article_title", "Unknown")}
+            Article Title: {state.get("article_title", "Unknown")}
 
-CLAIM VERIFICATIONS:
-{verifications_text}
+            CLAIM VERIFICATIONS:
+            {verifications_text}
 
-SENTIMENT ANALYSIS:
-Overall: {sentiment.get("label", "unknown")} (compound score: {sentiment.get("compound", 0):.2f})
+            SENTIMENT ANALYSIS:
+            Overall: {sentiment.get("label", "unknown")} (compound score: {sentiment.get("compound", 0):.2f})
 
-HUMAN REVIEWER NOTES:
-{json.dumps(human_answers, indent=2) if human_answers else "None provided"}
+            HUMAN REVIEWER NOTES:
+            {json.dumps(human_answers, indent=2) if human_answers else "None provided"}
 
-Write a professional 2-3 paragraph summary including:
-1. Overall assessment of the article's accuracy
-2. Key findings from fact-checking
-3. Any claims that readers should be cautious about
-4. The emotional tone of the article
+            Write a professional 2-3 paragraph summary including:
+            1. Overall assessment of the article's accuracy
+            2. Key findings from fact-checking
+            3. Any claims that readers should be cautious about
+            4. The emotional tone of the article
 
-Be balanced and objective."""
+            Be balanced and objective."""
 
     response = client.models.generate_content(
         model="gemini-2.5-flash",
@@ -710,4 +710,5 @@ if __name__ == "__main__":
     load_dotenv()
 
     local_graph = get_graph_with_checkpointer()
+    print("✅ Local graph created with SQLite persistence")
     print("✅ Local graph created with SQLite persistence")
