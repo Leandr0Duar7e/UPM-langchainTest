@@ -1,3 +1,8 @@
+# Langgraph local files
+.langgraph_api/
+checkpoints.sqlite*
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

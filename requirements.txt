@@ -1,3 +1,4 @@
+# LangChain demo dependencies
 langchain
 python-dotenv
 langchain-google-genai
@@ -5,3 +6,11 @@ ipykernel
 gradio
 param
 wikipedia
+langgraph
+langgraph-cli[inmem]
+google-genai
+langsmith
+requests
+beautifulsoup4
+vaderSentiment
+langgraph-checkpoint-sqlite

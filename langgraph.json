@@ -1,0 +1,8 @@
+{
+  "graphs": {
+    "smart_news": "./smart_news_graph.py:graph"
+  },
+  "dependencies": ["."],
+  "env": ".env"
+}
+
